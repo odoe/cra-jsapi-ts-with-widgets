@@ -1,4 +1,22 @@
-# Getting Started with Create React App
+# Create React App TypeScript with ArcGIS JSAPI Custom Widgets
+
+This sample shows how to use [custom JSAPI widgets](https://developers.arcgis.com/javascript/latest/sample-code/widgets-custom-widget/index.html) with the Create React App TypeScript Template.
+
+This is not ideal, because React uses `React.createElement` for vdom and the JSAPI uses `tsx` and TypeScript only allows a single `jsxFactory` to be defined. You need to do this on a per file bases for JSAPI custom widgets.
+
+Add to the top of a JSAPI Custom Widget `.tsx` file.
+
+```tsx
+// @ts-nocheck
+/** @jsxRuntime classic */
+/** @jsx tsx */
+```
+
+You lose type checking on your custom widget, so I suggest you add this once you widget is done. Main difference is React uses `className` and the API uses `class` to define DOM classes. This is only way to get this to work.
+
+Your welcome.
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
