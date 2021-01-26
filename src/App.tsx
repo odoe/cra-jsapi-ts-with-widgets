@@ -5,9 +5,11 @@ import DictionaryRenderer from "@arcgis/core/renderers/DictionaryRenderer";
 import MapView from "@arcgis/core/views/MapView";
 
 import "./App.css";
+import HelloWorld from "./widget/HelloWorld";
 
 function App() {
   const mapDiv = useRef(null);
+  const helloDiv = useRef(null);
 
   useEffect(() => {
     if (mapDiv.current) {
@@ -121,13 +123,25 @@ function App() {
 
       map.addMany([layer1, layer2]);
 
+      if (helloDiv.current) {
+        const hello = new HelloWorld({
+          container: helloDiv.current as any
+        });
+        view.ui.add(hello, 'top-right');
+      }
+
       view.when(() => {
         console.log('view ready');
       });
     }
   }, []);
 
-  return <div className="mapDiv" ref={mapDiv}></div>;
+  return (
+    <div className="appDiv">
+      <div className="mapDiv" ref={mapDiv}></div>
+      <div ref={helloDiv}></div>
+    </div>
+  );
 }
 
 export default App;
